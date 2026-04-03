@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class DriverManager {
 
     private static WebDriver driver;
-    public static final String BASE_URL = "http://localhost:3000";
+    public static final String BASE_URL = "https://verbostore.netlify.app";
 
     public static WebDriver getDriver() {
         if (driver == null) {

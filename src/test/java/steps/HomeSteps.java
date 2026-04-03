@@ -45,12 +45,12 @@ public class HomeSteps {
     @When("hace clic en {string}")
     public void hacerClic(String element) {
         switch (element) {
-            case "Ver colección" -> homePage.clickHeroCTA();
-            case "Remeras"      -> homePage.clickNavRemeras();
-            case "Buzos"        -> homePage.clickNavBuzos();
-            case "Pantalones"   -> homePage.clickNavPantalones();
-            case "Accesorios"   -> homePage.clickNavAccesorios();
-            case "Todos"        -> homePage.clickNavTodos();
+            case "Ver colección": homePage.clickHeroCTA(); break;
+            case "Remeras":       homePage.clickNavRemeras(); break;
+            case "Buzos":         homePage.clickNavBuzos(); break;
+            case "Pantalones":    homePage.clickNavPantalones(); break;
+            case "Accesorios":    homePage.clickNavAccesorios(); break;
+            case "Todos":         homePage.clickNavTodos(); break;
         }
     }
 
@@ -74,10 +74,10 @@ public class HomeSteps {
     @When("hace clic en la categoría {string}")
     public void hacerClicEnCategoria(String category) {
         switch (category) {
-            case "Remeras"    -> homePage.clickCategoryRemera();
-            case "Buzos"      -> homePage.clickCategoryBuzo();
-            case "Pantalones" -> homePage.clickCategoryPantalon();
-            case "Accesorios" -> homePage.clickCategoryAccesorio();
+            case "Remeras":    homePage.clickCategoryRemera(); break;
+            case "Buzos":      homePage.clickCategoryBuzo(); break;
+            case "Pantalones": homePage.clickCategoryPantalon(); break;
+            case "Accesorios": homePage.clickCategoryAccesorio(); break;
         }
     }
 

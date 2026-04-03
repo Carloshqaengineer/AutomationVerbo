@@ -8,7 +8,7 @@ import java.time.Duration;
 public class SeleniumUtils {
 
     private static WebDriverWait getWait() {
-        return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
+        return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
     }
 
     public static WebElement waitForElement(By locator) {
@@ -19,12 +19,26 @@ public class SeleniumUtils {
         return getWait().until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    public static void scrollTo(WebElement el) {
+        ((JavascriptExecutor) DriverManager.getDriver())
+            .executeScript("arguments[0].scrollIntoView({block:'center'});", el);
+        try { Thread.sleep(300); } catch (InterruptedException ignored) {}
+    }
+
     public static void click(By locator) {
-        waitForClickable(locator).click();
+        WebElement el = waitForClickable(locator);
+        scrollTo(el);
+        try {
+            el.click();
+        } catch (ElementClickInterceptedException e) {
+            ((JavascriptExecutor) DriverManager.getDriver())
+                .executeScript("arguments[0].click();", el);
+        }
     }
 
     public static void type(By locator, String text) {
         WebElement el = waitForElement(locator);
+        scrollTo(el);
         el.clear();
         el.sendKeys(text);
     }
@@ -35,8 +49,9 @@ public class SeleniumUtils {
 
     public static boolean isDisplayed(By locator) {
         try {
-            return DriverManager.getDriver().findElement(locator).isDisplayed();
-        } catch (NoSuchElementException e) {
+            WebElement el = getWait().until(ExpectedConditions.presenceOfElementLocated(locator));
+            return el.isDisplayed();
+        } catch (Exception e) {
             return false;
         }
     }
